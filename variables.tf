@@ -3,11 +3,11 @@ variable "aws_region" {
 }
 
 variable "aws_secret_key" {
-    default = "rDhN6gpMBvFHJWDc1ArORoaiyFy+q/aGyJLErSMa"
+    default = ""
 }
 
 variable "aws_access_key"{
-    default = "AKIA42OEQ7G2TRE346VG"
+    default = ""
 }
 
 variable "vpc_tenancy"{    
