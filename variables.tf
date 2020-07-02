@@ -19,7 +19,7 @@ variable "aws_env"{
 }
 
 variable "proyect_name"{    
-    derailt = "Reto ASA"
+    default = "Reto ASA"
 }
 
 # VARIABLES PARA NETWORKING
