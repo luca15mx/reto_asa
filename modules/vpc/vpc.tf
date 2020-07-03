@@ -2,6 +2,7 @@
 resource "aws_vpc" "default" {
   cidr_block           = var.mvpc_vpc_cidr
   enable_dns_hostnames = true
+  instance_tenancy     = var.mvpc_vpc_tenancy
 
   tags = {
     Name        = "VPC ${var.mvpc_project_name}"
@@ -48,7 +49,7 @@ resource "aws_subnet" "subnet_db_az1" {
   availability_zone = var.mvpc_aws_availability_zone_az1
 
   tags = {
-    Name        = "APP Subnet AZ1 ${var.mvpc_project_name}"
+    Name        = "DB Subnet AZ1 ${var.mvpc_project_name}"
     Environment = var.mvpc_aws_ambiente
   }
 }
@@ -92,7 +93,7 @@ resource "aws_subnet" "subnet_db_az2" {
   availability_zone = var.mvpc_aws_availability_zone_az2
 
   tags = {
-    Name        = "APP Subnet az2 ${var.mvpc_project_name}"
+    Name        = "DB Subnet az2 ${var.mvpc_project_name}"
     Environment = "${var.mvpc_aws_ambiente}"
   }
 }
@@ -265,16 +266,16 @@ output "exp_subnet_db_az1_id" {
 ################################################################################
 
 output "exp_subnet_publica_az2_id" {
-  value = aws_subnet.public_subnet_az1.id
+  value = aws_subnet.public_subnet_az2.id
 }
 
 
 output "exp_subnet_app_az2_id" {
-  value = aws_subnet.subnet_app_az1.id
+  value = aws_subnet.subnet_app_az2.id
 }
 
 output "exp_subnet_db_az2_id" {
-  value = aws_subnet.subnet_db_az1.id
+  value = aws_subnet.subnet_db_az2.id
 }
 
 ################################################################################

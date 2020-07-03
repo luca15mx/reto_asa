@@ -56,7 +56,6 @@ variable "gv_az2" {
   default = "us-east-1b"
 }
 
-
 variable "gv_public_subnet_cdir_az2" {
   default = "10.101.4.0/24"
 }
@@ -71,6 +70,18 @@ variable "gv_db_subnet_cdir_az2" {
 
 # VARIABLES PARA COMPUTO
 
-variable "gv_ec2_ami" {
-  default = ""
+variable "gv_ec2_wordpress_ami" {
+  default = "ami-07a1447c564ea9f8f"
+}
+
+variable "gv_ec2_ami_size" {
+  default = "t2-micro"
+}
+
+variable "gv_ec2_keyname" {
+  default = "wordpress"
+}
+
+variable "gv_ec2_key_path" {
+  default = "modules/computo/llaves/id_rsa2.pub"
 }

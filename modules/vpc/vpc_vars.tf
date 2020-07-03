@@ -6,6 +6,8 @@ variable "mvpc_aws_ambiente" {}
 
 variable "mvpc_vpc_cidr" {}
 
+variable "mvpc_vpc_tenancy" {}
+
 # ###########################################################################################
 
 #  Subredes AZ1
