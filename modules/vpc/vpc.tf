@@ -254,7 +254,6 @@ output "exp_subnet_publica_az1_id" {
   value = aws_subnet.public_subnet_az1.id
 }
 
-
 output "exp_subnet_app_az1_id" {
   value = aws_subnet.subnet_app_az1.id
 }
@@ -268,7 +267,6 @@ output "exp_subnet_db_az1_id" {
 output "exp_subnet_publica_az2_id" {
   value = aws_subnet.public_subnet_az2.id
 }
-
 
 output "exp_subnet_app_az2_id" {
   value = aws_subnet.subnet_app_az2.id

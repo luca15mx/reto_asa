@@ -8,3 +8,6 @@
 
 # Crash log files
 crash.log
+
+# Planner files
+planner*

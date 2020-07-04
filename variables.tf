@@ -3,7 +3,7 @@ variable "gv_project_name" {
 }
 
 variable "gv_aws_region" {
-  default = "us-east-1"
+  default = "us-west-1"
 }
 
 variable "gv_aws_secret_key" {
@@ -15,7 +15,7 @@ variable "gv_aws_access_key" {
 }
 
 variable "gv_vpc_tenancy" {
-  default = "dedicated"
+  default = "default"
 }
 
 variable "gv_aws_env" {
@@ -35,7 +35,7 @@ variable "gv_vpc_cidr" {
 # Zona de disponibilidad 1
 
 variable "gv_az1" {
-  default = "us-east-1a"
+  default = "us-west-1a"
 }
 
 variable "gv_public_subnet_cdir_az1" {
@@ -53,7 +53,7 @@ variable "gv_db_subnet_cdir_az1" {
 # Zona de disponibilidad 2
 
 variable "gv_az2" {
-  default = "us-east-1b"
+  default = "us-west-1c"
 }
 
 variable "gv_public_subnet_cdir_az2" {
@@ -71,11 +71,11 @@ variable "gv_db_subnet_cdir_az2" {
 # VARIABLES PARA COMPUTO
 
 variable "gv_ec2_wordpress_ami" {
-  default = "ami-07a1447c564ea9f8f"
+  default = "ami-04e59c05167ea7bd5"
 }
 
 variable "gv_ec2_ami_size" {
-  default = "t2-micro"
+  default = "t2.micro"
 }
 
 variable "gv_ec2_keyname" {

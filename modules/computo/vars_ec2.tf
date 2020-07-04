@@ -10,6 +10,16 @@ variable "mec2_keyname" {}
 
 variable "mec2_key_path" {}
 
-variable "mec2_sg_app_az1" {}
+variable "mec2_sg_app_az1" {
+  default = ""
+}
 
-variable "mec2_sg_app_az2" {}
+variable "mec2_sg_app_az2" {
+  default = ""
+}
+
+variable "mec2_sg_public" {}
+
+variable "mec2_subnet_app_az1" {}
+
+variable "mec2_subnet_app_az2" {}
