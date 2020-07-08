@@ -1,3 +1,7 @@
+# TODO:
+# Crear los sg para los wordpress
+# Verificar el error de permiso de la creación del bucket
+# Verificar el uso de depends on
 
 resource "aws_key_pair" "default" {
   key_name   = var.mec2_keyname
@@ -53,7 +57,64 @@ resource "aws_instance" "wp_az2" {
   }
 
   tags = {
-    Name        = "EC2 WPess exp_subnet_app_az2_id ${var.mec2_project_name}"
+    Name        = "EC2 WPess AZ2 ${var.mec2_project_name}"
+    Environment = var.mec2_aws_ambiente
+  }
+}
+
+################################################################################
+#  Crea App Load Balancer - ELB
+################################################################################
+
+resource "random_pet" "this" {
+  length = 2
+}
+
+resource "aws_s3_bucket" "bucket_elb_logs" {
+  bucket = "s3-elb-logs-tf-asa-${random_pet.this.id}"
+  # acl           = "private"
+  force_destroy = true
+
+  tags = {
+    Name        = "Bucket ELB Logs ${var.mec2_project_name}"
+    Environment = var.mec2_aws_ambiente
+  }
+}
+
+resource "aws_elb" "elb_global" {
+  name = "ELB-Global"
+
+  subnets = [var.mec2_subnet_app_az1, var.mec2_subnet_app_az2]
+
+  access_logs {
+    bucket        = aws_s3_bucket.bucket_elb_logs.id
+    bucket_prefix = "elb-log"
+    interval      = 60
+  }
+
+  listener {
+    instance_port     = 80
+    instance_protocol = "http"
+    lb_port           = 80
+    lb_protocol       = "http"
+  }
+
+  health_check {
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    timeout             = 3
+    target              = "HTTP:80/"
+    interval            = 30
+  }
+
+  instances                   = ["${aws_instance.wp_az1.id}", "${aws_instance.wp_az2.id}"]
+  cross_zone_load_balancing   = true
+  idle_timeout                = 400
+  connection_draining         = true
+  connection_draining_timeout = 400
+
+  tags = {
+    Name        = "ELB WPess ${var.mec2_project_name}"
     Environment = var.mec2_aws_ambiente
   }
 }

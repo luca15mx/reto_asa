@@ -23,3 +23,7 @@ variable "mec2_sg_public" {}
 variable "mec2_subnet_app_az1" {}
 
 variable "mec2_subnet_app_az2" {}
+
+variable "mec2_az1" {}
+
+variable "mec2_az2" {}
