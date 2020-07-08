@@ -30,18 +30,16 @@ module "vpc" {
   mvpc_db_subnet_cdir_az2        = var.gv_db_subnet_cdir_az2
 }
 
-module "computo" {
-  source = "./modules/computo"
-
-  mec2_project_name   = var.gv_project_name
-  mec2_aws_ambiente   = var.gv_aws_env
-  mec2_wordpress_ami  = var.gv_ec2_wordpress_ami
-  mec2_ami_size       = var.gv_ec2_ami_size
-  mec2_keyname        = var.gv_ec2_keyname
-  mec2_key_path       = var.gv_ec2_key_path
-  mec2_subnet_app_az1 = module.vpc.exp_subnet_app_az1_id
-  mec2_subnet_app_az2 = module.vpc.exp_subnet_app_az2_id
-  mec2_sg_public      = module.vpc.exp_sg_public_id
-  # mec2_sg_app_az1     = module.vpc.exp_subnet_app_az1_id
-  # mec2_sg_app_az2     = module.vpc.exp_subnet_app_az2_id
-}
+# module "computo" {
+#   source = "./modules/computo"
+#
+#   mec2_project_name   = var.gv_project_name
+#   mec2_aws_ambiente   = var.gv_aws_env
+#   mec2_wordpress_ami  = var.gv_ec2_wordpress_ami
+#   mec2_ami_size       = var.gv_ec2_ami_size
+#   mec2_keyname        = var.gv_ec2_keyname
+#   mec2_key_path       = var.gv_ec2_key_path
+#   mec2_subnet_app_az1 = module.vpc.exp_subnet_app_az1_id
+#   mec2_subnet_app_az2 = module.vpc.exp_subnet_app_az2_id
+#   mec2_sg_public      = module.vpc.exp_sg_public_id
+# }

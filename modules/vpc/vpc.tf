@@ -111,6 +111,53 @@ resource "aws_internet_gateway" "igw" {
 }
 
 # ###########################################################################################
+# NAT gateway
+# ###########################################################################################
+
+resource "aws_eip" "tfeip_az1" {
+  vpc        = true
+  depends_on = [aws_internet_gateway.igw]
+  tags = {
+    Name        = "Natgw Eip AZ1 ${var.mvpc_project_name}"
+    Environment = "${var.mvpc_aws_ambiente}"
+  }
+}
+
+# Create NAT Gateway AZ1
+resource "aws_nat_gateway" "nat-gw_az1" {
+  allocation_id = aws_eip.tfeip_az1.id
+  subnet_id     = aws_subnet.public_subnet_az1.id
+  depends_on    = [aws_internet_gateway.igw]
+
+  tags = {
+    Name        = "Nat-gw AZ1 ${var.mvpc_project_name}"
+    Environment = "${var.mvpc_aws_ambiente}"
+  }
+}
+
+resource "aws_eip" "tfeip_az2" {
+  vpc        = true
+  depends_on = [aws_internet_gateway.igw]
+
+  tags = {
+    Name        = "Natgw Eip AZ2 ${var.mvpc_project_name}"
+    Environment = "${var.mvpc_aws_ambiente}"
+  }
+}
+
+# Create NAT Gateway AZ2
+resource "aws_nat_gateway" "nat-gw_az2" {
+  allocation_id = aws_eip.tfeip_az2.id
+  subnet_id     = aws_subnet.public_subnet_az2.id
+  depends_on    = [aws_internet_gateway.igw]
+
+  tags = {
+    Name        = "Nat-gw AZ2 ${var.mvpc_project_name}"
+    Environment = "${var.mvpc_aws_ambiente}"
+  }
+}
+
+# ###########################################################################################
 # Define the route table
 # ###########################################################################################
 resource "aws_route_table" "public_rt" {
@@ -297,4 +344,12 @@ output "exp_sg_public_id" {
 
 output "exp_sg_private_id" {
   value = aws_security_group.sg_private.id
+}
+
+output "exp_natgw_az1_id" {
+  value = aws_nat_gateway.nat-gw_az1
+}
+
+output "exp_natgw_az2_id" {
+  value = aws_nat_gateway.nat-gw_az2
 }
